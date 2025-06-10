@@ -5,23 +5,53 @@ const Portfolio = () => {
   const [activeSection, setActiveSection] = useState('home');
   const [isVisible, setIsVisible] = useState({});
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [headerAnimated, setHeaderAnimated] = useState(false);
 
   useEffect(() => {
     const handleMouseMove = (e) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
 
-    // Trigger header animation once
-    const timer = setTimeout(() => {
-      setHeaderAnimated(true);
-    }, 100);
-
     window.addEventListener('mousemove', handleMouseMove);
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      clearTimeout(timer);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const navHeight = 80; // Account for navbar height
+      const elementPosition = element.offsetTop - navHeight;
+      
+      window.scrollTo({
+        top: elementPosition,
+        behavior: 'smooth'
+      });
+      
+      setActiveSection(sectionId);
+    }
+  };
+
+  // Update active section on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['home', 'about', 'skills', 'projects', 'contact'];
+      const scrollPosition = window.scrollY + 100;
+
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const offsetTop = element.offsetTop;
+          const offsetBottom = offsetTop + element.offsetHeight;
+
+          if (scrollPosition >= offsetTop && scrollPosition < offsetBottom) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
     };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const projects = [
@@ -56,14 +86,14 @@ const Portfolio = () => {
   ];
 
   const ScrollIndicator = () => (
-    <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+    <div className="absolute bottom-13 left-1/2 transform -translate-x-1/2 animate-bounce">
       <ChevronDown className="w-6 h-6 text-white" />
     </div>
   );
 
   const FloatingCursor = () => (
     <div 
-      className="fixed w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full pointer-events-none z-50 mix-blend-difference transition-transform duration-150 ease-out"
+      className="fixed w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full pointer-events-none z-[9999] mix-blend-difference transition-transform duration-150 ease-out"
       style={{
         left: mousePosition.x - 16,
         top: mousePosition.y - 16,
@@ -73,7 +103,7 @@ const Portfolio = () => {
   );
 
   const NavBar = () => (
-    <nav className="fixed top-0 w-full bg-black/10 backdrop-blur-md z-50 border-b border-white/10">
+    <nav className="fixed top-0 w-full bg-black/10 backdrop-blur-md z-[100] border-b border-white/10">
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
           <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
@@ -83,7 +113,7 @@ const Portfolio = () => {
             {['Home', 'About', 'Skills', 'Projects', 'Contact'].map((item) => (
               <button
                 key={item}
-                onClick={() => setActiveSection(item.toLowerCase())}
+                onClick={() => scrollToSection(item.toLowerCase())}
                 className={`transition-all duration-300 hover:text-blue-400 ${
                   activeSection === item.toLowerCase() ? 'text-blue-400' : 'text-white'
                 }`}
@@ -98,7 +128,7 @@ const Portfolio = () => {
   );
 
   const HeroSection = () => (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
       <div className="absolute inset-0 opacity-20">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 animate-pulse"></div>
         <div className="absolute top-0 left-0 w-full h-full bg-repeat opacity-30" style={{
@@ -108,36 +138,42 @@ const Portfolio = () => {
       </div>
       
       <div className="text-center z-10 px-6">
-        <div className="mb-8 relative z-30">
-          <div className={`w-32 h-32 mt-17 mx-auto rounded-full bg-gradient-to-r from-blue-400 to-purple-600 p-1 ${headerAnimated ? 'animate-pulse' : ''}`}>
+        <div className="mb-8 relative z-10">
+          <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-r from-blue-400 to-purple-600 p-1 hero-pulse mt-16">
             <div className="w-full h-full rounded-full bg-slate-800 flex items-center justify-center">
               <User className="w-16 h-16 text-white" />
             </div>
           </div>
         </div>
         
-        <h1 className={`text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent ${headerAnimated ? 'animate-fade-in-up' : 'opacity-0'}`}>
+        <h1 className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent hero-fade-in-up">
           DomDev
         </h1>
         
-        <p className={`text-xl md:text-2xl text-gray-300 mb-8 ${headerAnimated ? 'animate-fade-in-up animation-delay-200' : 'opacity-0'}`}>
+        <p className="text-xl md:text-2xl text-gray-300 mb-8 hero-fade-in-up hero-delay-200">
           Full Stack Developer & Creative Designer
         </p>
         
-        <div className={`flex justify-center space-x-6 mb-12 ${headerAnimated ? 'animate-fade-in-up animation-delay-400' : 'opacity-0'}`}>
-          <button className="group bg-gradient-to-r from-blue-500 to-purple-600 px-8 py-3 rounded-full font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25">
+        <div className="flex justify-center space-x-6 mb-12 hero-fade-in-up hero-delay-400">
+          <button 
+            onClick={() => scrollToSection('projects')}
+            className="group bg-gradient-to-r from-blue-500 to-purple-600 px-8 py-3 rounded-full font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25"
+          >
             <span className="flex items-center space-x-2">
               <span>View My Work</span>
               <ExternalLink className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </span>
           </button>
           
-          <button className="border-2 border-white/20 px-8 py-3 rounded-full font-semibold transition-all duration-300 hover:bg-white/10 hover:scale-105">
+          <button 
+            onClick={() => scrollToSection('contact')}
+            className="border-2 border-white/20 px-8 py-3 rounded-full font-semibold transition-all duration-300 hover:bg-white/10 hover:scale-105"
+          >
             Get In Touch
           </button>
         </div>
         
-        <div className={`flex justify-center space-x-6 ${headerAnimated ? 'animate-fade-in-up animation-delay-600' : 'opacity-0'}`}>
+        <div className="flex justify-center space-x-6 hero-fade-in-up hero-delay-600">
           {[Github, Linkedin, Mail].map((Icon, index) => (
             <button key={index} className="w-12 h-12 border border-white/20 rounded-full flex items-center justify-center transition-all duration-300 hover:border-blue-400 hover:text-blue-400 hover:scale-110">
               <Icon className="w-5 h-5" />
@@ -151,7 +187,7 @@ const Portfolio = () => {
   );
 
   const AboutSection = () => (
-    <section className="py-20 bg-slate-800">
+    <section id="about" className="py-20 bg-slate-800">
       <div className="max-w-6xl mx-auto px-6">
         <h2 className="text-5xl font-bold text-center mb-16 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
           About Me
@@ -195,7 +231,7 @@ const Portfolio = () => {
   );
 
   const SkillsSection = () => (
-    <section className="py-20 bg-gradient-to-br from-slate-900 to-slate-800">
+    <section id="skills" className="py-20 bg-gradient-to-br from-slate-900 to-slate-800">
       <div className="max-w-6xl mx-auto px-6">
         <h2 className="text-5xl font-bold text-center mb-16 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
           Skills & Expertise
@@ -231,7 +267,7 @@ const Portfolio = () => {
   );
 
   const ProjectsSection = () => (
-    <section className="py-20 bg-slate-800">
+    <section id="projects" className="py-20 bg-slate-800">
       <div className="max-w-7xl mx-auto px-6">
         <h2 className="text-5xl font-bold text-center mb-16 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
           Featured Projects
@@ -276,7 +312,7 @@ const Portfolio = () => {
   );
 
   const ContactSection = () => (
-    <section className="py-20 bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900">
+    <section id="contact" className="py-20 bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900">
       <div className="max-w-4xl mx-auto px-6 text-center">
         <h2 className="text-5xl font-bold mb-8 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
           Let's Work Together
@@ -323,38 +359,35 @@ const Portfolio = () => {
       <SkillsSection />
       <ProjectsSection />
       <ContactSection />
-      
-      <style jsx>{`
-        @keyframes fade-in-up {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        .animate-fade-in-up {
-          animation: fade-in-up 0.8s ease-out forwards;
-        }
-        
-        .animation-delay-200 {
-          animation-delay: 0.2s;
-          opacity: 0;
-        }
-        
-        .animation-delay-400 {
-          animation-delay: 0.4s;
-          opacity: 0;
-        }
-        
-        .animation-delay-600 {
-          animation-delay: 0.6s;
-          opacity: 0;
-        }
-      `}</style>
+ <style jsx>{`
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.8s ease-out forwards;
+  }
+
+  .animation-delay-200 {
+    animation-delay: 0.2s;
+  }
+
+  .animation-delay-400 {
+    animation-delay: 0.4s;
+  }
+
+  .animation-delay-600 {
+    animation-delay: 0.6s;
+  }
+`}</style>
+
     </div>
   );
 };
