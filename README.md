@@ -19,7 +19,7 @@ Welcome to **DomDev**, a modern, responsive, and animated **Full-Stack Developer
 
 ## 📸 Preview
 
-![Portfolio Preview](https://ibb.co/Xxrt2xM6)
+![Portfolio Preview](https://postimg.cc/18RWBGmK)
 
 ---
 
