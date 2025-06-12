@@ -1,12 +1,94 @@
-# React + Vite
+# 💼 DomDev – Developer Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to **DomDev**, a modern, responsive, and animated **Full-Stack Developer Portfolio** built with **React** and **Tailwind CSS**. This portfolio showcases projects, skills, and experience using interactive UI, animated transitions, and section-based navigation.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- 🖥️ **Single Page Application** with smooth scroll navigation
+- 🎨 Animated **Hero Section** with floating cursor and interactive buttons
+- 💡 **Skills Section** with animated progress bars
+- 🛠️ **Projects Showcase** with hover effects and external links
+- 📱 Fully responsive design for all screen sizes
+- 🌈 Elegant use of **Tailwind gradients** and custom utilities
+- 🖱️ Custom mouse cursor effect following user movement
+- 🔗 Integrated icons using `lucide-react`
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 📸 Preview
+
+![Portfolio Preview](https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&h=600&fit=crop)
+
+---
+
+## 🧑‍💻 Technologies Used
+
+- [React](https://reactjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Lucide React Icons](https://lucide.dev/)
+- [JavaScript (ES6+)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+
+---
+
+## 🗂️ Folder Structure
+
+```bash
+src/
+├── components/
+│ ├── NavBar.jsx
+│ ├── HeroSection.jsx
+│ ├── AboutSection.jsx
+│ ├── SkillsSection.jsx
+│ └── ProjectsSection.jsx
+├── App.jsx
+├── index.jsx
+└── assets/
+```
+
+---
+
+## 📦 Installation
+
+To get a local copy up and running:
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/domdev-portfolio.git
+
+# Navigate to the project directory
+cd domdev-portfolio
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
+```
+
+🛠️ Customization
+
+    🔗 Replace project data inside the projects array.
+
+    ✍️ Update personal info and images in the HeroSection and AboutSection.
+
+    🎨 Modify colors and animations with Tailwind classes.
+
+✨ To Do / Improvements
+
+    Add dark/light mode toggle 🌙🌞
+
+    Deploy to GitHub Pages or Vercel
+
+    Integrate contact form with email API (e.g. EmailJS)
+
+    Add blog or testimonials section
+
+📬 Contact
+
+Created with ❤️ by DomDev
+
+📄 License
+
+This project is open-source and available under the MIT License.
