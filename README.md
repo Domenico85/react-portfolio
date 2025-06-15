@@ -75,7 +75,7 @@ npm run dev
 
     🎨 Modify colors and animations with Tailwind classes.
 
-✨ To Do / Improvements
+✨ To Do / Improvements.
 
     Add dark/light mode toggle 🌙🌞
 
