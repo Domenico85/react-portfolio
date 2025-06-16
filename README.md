@@ -67,7 +67,7 @@ npm install
 npm run dev
 ```
 
-🛠️ Customization
+🛠️ Customization:
 
     🔗 Replace project data inside the projects array.
 
@@ -75,7 +75,7 @@ npm run dev
 
     🎨 Modify colors and animations with Tailwind classes.
 
-✨ To Do / Improvements.
+✨ To Do / Improvements:
 
     Add dark/light mode toggle 🌙🌞
 
