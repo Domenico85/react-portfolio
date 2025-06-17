@@ -85,7 +85,9 @@ npm run dev
 
     Add blog or testimonials section
 
-📬 Contact
+📬 Contact:
+
+domenicociardullo85@gmail.com
 
 Created with ❤️ by DomDev
 
