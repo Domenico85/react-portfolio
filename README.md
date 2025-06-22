@@ -49,7 +49,7 @@ src/
 
 ---
 
-## 📦 Installation
+## 📦 Installation:
 
 To get a local copy up and running:
 
