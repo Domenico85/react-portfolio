@@ -32,7 +32,7 @@ Welcome to **DomDev**, a modern, responsive, and animated **Full-Stack Developer
 
 ---
 
-## 🗂️ Folder Structure
+## 🗂️ Folder Structure:
 
 ```bash
 src/
