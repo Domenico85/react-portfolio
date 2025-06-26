@@ -23,7 +23,7 @@ Welcome to **DomDev**, a modern, responsive, and animated **Full-Stack Developer
 
 ---
 
-## 🧑‍💻 Technologies Used
+## 🧑‍💻 Technologies Used:
 
 - [React](https://reactjs.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
