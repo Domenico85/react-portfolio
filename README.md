@@ -4,7 +4,7 @@ Welcome to **DomDev**, a modern, responsive, and animated **Full-Stack Developer
 
 ---
 
-## 🚀 Features
+## 🚀 Features:
 
 - 🖥️ **Single Page Application** with smooth scroll navigation
 - 🎨 Animated **Hero Section** with floating cursor and interactive buttons
